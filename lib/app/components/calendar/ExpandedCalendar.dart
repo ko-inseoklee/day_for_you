@@ -9,10 +9,11 @@ class ExpandedCalendar extends StatelessWidget {
 
   final double height;
   final double toggleBtnHeight = 20;
-  final controller = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(HomeController());
+
     return Container(
       color: Colors.indigo,
       height: height,

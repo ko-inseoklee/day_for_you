@@ -15,14 +15,17 @@ class AppView extends GetView<AppController> {
     return WillPopScope(
       child: Obx(
         () => Scaffold(
-          body: IndexedStack(
-            index: controller.pageIdx.value,
-            children: const [
-              HomeView(),
-              ReportView(),
-              RoutineView(),
-              CommunityView()
-            ],
+          body: Padding(
+            padding: const EdgeInsets.only(top: 60.0),
+            child: IndexedStack(
+              index: controller.pageIdx.value,
+              children: const [
+                HomeView(),
+                ReportView(),
+                RoutineView(),
+                CommunityView()
+              ],
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             key: controller.navigationKey,

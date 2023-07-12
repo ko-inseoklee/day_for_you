@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class HomeCalendar extends StatelessWidget {
   HomeCalendar({Key? key}) : super(key: key);
 
-  var shrinkedHeight = 120.0.obs;
+  var shrinkedHeight = 110.0.obs;
 
   var expandedHeight = 300.0.obs;
 
@@ -15,15 +15,19 @@ class HomeCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        height: controller.isCalendarExpanded.value ? expandedHeight.value : shrinkedHeight.value,
-        child: SingleChildScrollView(
-          child: controller.isCalendarExpanded.value ?
-          ExpandedCalendar( height: expandedHeight.value ) :
-          ShrinkedCalendar( height: shrinkedHeight.value ),
-        )
-      ),
+    return Column(
+      children: [
+        Obx(() => AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            height: controller.isCalendarExpanded.value ? expandedHeight.value : shrinkedHeight.value,
+            child: SingleChildScrollView(
+              child: controller.isCalendarExpanded.value ?
+              ExpandedCalendar( height: expandedHeight.value ) :
+              ShrinkedCalendar( height: shrinkedHeight.value ),
+            )
+          ),
+        ),
+      ],
     );
   }
 }

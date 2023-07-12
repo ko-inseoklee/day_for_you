@@ -13,25 +13,12 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 60.0, bottom: 8.0),
-            child: Center(
-              child: Text(
-                  '${Get.find<AppController>().selectedDateTime.value.month}월'
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                HomeCalendar()
-              ],
-            ),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            HomeCalendar()
+          ],
+        ),
       ),
     );
   }
