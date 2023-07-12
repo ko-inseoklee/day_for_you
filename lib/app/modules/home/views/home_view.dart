@@ -1,3 +1,7 @@
+import 'package:day_for_you/app/components/calendar/ExpandedCalendar.dart';
+import 'package:day_for_you/app/components/calendar/HomeCalendar.dart';
+import 'package:day_for_you/app/components/calendar/ShrinkedCalendar.dart';
+import 'package:day_for_you/app/modules/app/controllers/app_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,15 +13,25 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('HomeView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 60.0, bottom: 8.0),
+            child: Center(
+              child: Text(
+                  '${Get.find<AppController>().selectedDateTime.value.month}월'
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                HomeCalendar()
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
