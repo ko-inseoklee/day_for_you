@@ -12,11 +12,16 @@ class AppController extends GetxController {
 
   Rx<DateTime> selectedDateTime = DateTime.now().obs;
 
+  void onClickDate (int date) => selectedDateTime(DateTime.utc(
+    selectedDateTime.value.year,
+    selectedDateTime.value.month,
+    date
+  ));
+
   void changeBottomNav(int value, {bool hasGesture = true}) {
     if (kDebugMode) {
       print(value);
     }
-
     pageIdx(value);
    }
 

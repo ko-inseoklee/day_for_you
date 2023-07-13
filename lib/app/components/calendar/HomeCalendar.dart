@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class HomeCalendar extends StatelessWidget {
   HomeCalendar({Key? key}) : super(key: key);
 
-  var shrinkedHeight = 110.0.obs;
+  var shrinkedHeight = 115.0.obs;
 
   var expandedHeight = 300.0.obs;
 

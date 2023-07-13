@@ -15,8 +15,9 @@ class AppView extends GetView<AppController> {
     return WillPopScope(
       child: Obx(
         () => Scaffold(
-          body: Padding(
+          body: Container(
             padding: const EdgeInsets.only(top: 60.0),
+            color: Colors.white,
             child: IndexedStack(
               index: controller.pageIdx.value,
               children: const [

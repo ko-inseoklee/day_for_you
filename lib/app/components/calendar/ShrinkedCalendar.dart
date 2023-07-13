@@ -22,6 +22,7 @@ class ShrinkedCalendar extends StatelessWidget {
 
     return Container(
       height: height,
+      color: Colors.white,
       child: Column(
         children: [
           Container(
@@ -34,7 +35,7 @@ class ShrinkedCalendar extends StatelessWidget {
             ),
           ),
           Container(
-            width: double.maxFinite, height: height - toggleBtnHeight - monthHeight,
+            width: double.maxFinite, height: height - toggleBtnHeight - monthHeight - 5,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value),
@@ -44,9 +45,18 @@ class ShrinkedCalendar extends StatelessWidget {
             ),
           ),
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(16.0), bottomRight: Radius.circular(16.0)),
-            ),
+            margin: EdgeInsets.only(top: 0.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(35.0)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0,5),
+                    blurRadius: 3.0
+                  )
+                ]
+              ),
             width: double.maxFinite, height: toggleBtnHeight,
             alignment: Alignment.center,
             child: IconButton(
