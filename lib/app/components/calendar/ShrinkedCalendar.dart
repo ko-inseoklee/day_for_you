@@ -14,11 +14,25 @@ class ShrinkedCalendar extends StatelessWidget {
   final double height;
   final double monthHeight = 30;
   final double toggleBtnHeight = 20;
+  final dateKeys = <GlobalKey>[];
+
+  List<Widget> buildDateCardsWithKeys (int maxDate) {
+    final List<Widget> cardList = <Widget>[];
+
+    for(int i = 0; i < maxDate; i++) {
+      dateKeys.add(GlobalKey());
+      cardList.add(DateCard(date: i + 1, dateKey: dateKeys[i]));
+    }
+
+    return cardList;
+  }
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
     final globalController = Get.put(AppController());
+
+    // List<Widget> dateCards = List.generate(CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value), (index) => DateCard(date: index + 1));
 
     return Container(
       height: height,
@@ -36,13 +50,19 @@ class ShrinkedCalendar extends StatelessWidget {
           ),
           Container(
             width: double.maxFinite, height: height - toggleBtnHeight - monthHeight - 5,
-            child: ListView.builder(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: buildDateCardsWithKeys(CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value)),
+              ),
+            )
+            /*ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value),
               itemBuilder: (context, idx) {
                 return DateCard(date: idx + 1);
               },
-            ),
+            ),*/
           ),
           Container(
             margin: EdgeInsets.only(top: 0.0),
