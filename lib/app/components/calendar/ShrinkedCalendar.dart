@@ -4,16 +4,24 @@ import 'package:day_for_you/app/modules/app/controllers/app_controller.dart';
 import 'package:day_for_you/app/modules/home/controllers/home_controller.dart';
 import 'package:day_for_you/app/utils/calendarUtils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
-class ShrinkedCalendar extends StatelessWidget {
+class ShrinkedCalendar extends StatefulWidget {
   ShrinkedCalendar({super.key, required this.height});
 
   final double height;
+
+  @override
+  State<ShrinkedCalendar> createState() => _ShrinkedCalendarState();
+}
+
+class _ShrinkedCalendarState extends State<ShrinkedCalendar> {
   final double monthHeight = 30;
   final double toggleBtnHeight = 20;
+
   final dateKeys = <GlobalKey>[];
 
   List<Widget> buildDateCardsWithKeys (int maxDate) {
@@ -32,41 +40,56 @@ class ShrinkedCalendar extends StatelessWidget {
     final controller = Get.put(HomeController());
     final globalController = Get.put(AppController());
 
-    // List<Widget> dateCards = List.generate(CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value), (index) => DateCard(date: index + 1));
-
     return Container(
-      height: height,
+      height: widget.height,
       color: Colors.white,
       child: Column(
         children: [
-          Container(
+          SizedBox(
             height: monthHeight,
-            child: Center(
-              child: Text(
-                  '${Get.find<AppController>().selectedDateTime.value.month}월',
-                style: const TextStyle(fontSize: 20.0),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print('left');
+                      }
+                      // globalController.onClickMonth(-1);
+                      // print(globalController.selectedDateTime);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios,size: 14.0,)),
+                Obx(() => Text(
+                    '${Get.find<AppController>().selectedDateTime.value.month}월',
+                    style: const TextStyle(fontSize: 20.0),
+                  ),
+                ),
+                IconButton(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    onPressed: () {
+                      if (kDebugMode) {
+                        print("right");
+                      }
+                      // globalController.onClickMonth(1)
+                    },
+                    icon: const Icon(Icons.arrow_forward_ios,size: 14.0,)),
+              ],
+            ),
+          ),
+          Obx(() => Container(
+              width: double.maxFinite, height: widget.height - toggleBtnHeight - monthHeight - 5,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: buildDateCardsWithKeys(CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value)),
+                ),
+              )
             ),
           ),
           Container(
-            width: double.maxFinite, height: height - toggleBtnHeight - monthHeight - 5,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: buildDateCardsWithKeys(CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value)),
-              ),
-            )
-            /*ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: CalendarUtil.endDateOfMonth(globalController.selectedDateTime.value),
-              itemBuilder: (context, idx) {
-                return DateCard(date: idx + 1);
-              },
-            ),*/
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 0.0),
-              decoration: BoxDecoration(
+            margin: const EdgeInsets.only(top: 0.0),
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(35.0)),
                 boxShadow: [

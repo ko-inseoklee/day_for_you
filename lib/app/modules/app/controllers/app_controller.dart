@@ -18,6 +18,12 @@ class AppController extends GetxController {
     date
   ));
 
+  void onClickMonth (int interval) => selectedDateTime(DateTime.utc(
+    selectedDateTime.value.year,
+    selectedDateTime.value.month + interval,
+    1
+  ));
+
   void changeBottomNav(int value, {bool hasGesture = true}) {
     if (kDebugMode) {
       print(value);
