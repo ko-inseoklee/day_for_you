@@ -6,5 +6,4 @@ class CalendarUtil{
 
     return dateTime.day;
   }
-
 }

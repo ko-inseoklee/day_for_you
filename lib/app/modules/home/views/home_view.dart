@@ -2,6 +2,7 @@ import 'package:day_for_you/app/components/calendar/ExpandedCalendar.dart';
 import 'package:day_for_you/app/components/calendar/HomeCalendar.dart';
 import 'package:day_for_you/app/components/calendar/ShrinkedCalendar.dart';
 import 'package:day_for_you/app/modules/app/controllers/app_controller.dart';
+import 'package:day_for_you/app/modules/home/views/todos_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,7 +18,8 @@ class HomeView extends GetView<HomeController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HomeCalendar()
+            HomeCalendar(),
+            TodosView()
           ],
         ),
       ),
